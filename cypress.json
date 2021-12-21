@@ -1,4 +1,6 @@
 {
-    "viewportWidth": 1110,
-    "viewportHeight": 800
+  "viewportWidth": 1110,
+  "viewportHeight": 800,
+  "componentFolder": "cypress/component",
+  "testFiles": "**/*.spec.{js,ts,jsx,tsx}"
 }
