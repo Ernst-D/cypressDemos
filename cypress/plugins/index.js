@@ -1,5 +1,3 @@
-const injectDevServer = require("@cypress/react/plugins/load-webpack");
-
 /// <reference types="cypress" />
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
@@ -10,6 +8,7 @@ const injectDevServer = require("@cypress/react/plugins/load-webpack");
 // You can read more here:
 // https://on.cypress.io/plugins-guide
 // ***********************************************************
+
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
@@ -17,15 +16,7 @@ const injectDevServer = require("@cypress/react/plugins/load-webpack");
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
-module.exports = (on, config) => {// `on` is used to hook into various events Cypress emits
+module.exports = (on, config) => {
+  // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
-
-  if (config.testingType === "component") {
-    injectDevServer(on, config, {
-      // TODO replace with valid webpack config path
-      webpackFilename: './webpack.config.js'
-    });
-  }
-
-  return config; // IMPORTANT to return a config
-};
+}
