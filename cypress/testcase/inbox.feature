@@ -1,0 +1,1 @@
+Given User navigates to the inbox page
