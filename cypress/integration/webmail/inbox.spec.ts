@@ -1,3 +1,5 @@
+/// <reference types="cypress-xpath" />
+
 import webmailPage from "../../pages/webmail/webmail.page";
 import env from "../../support/env";
 
@@ -8,6 +10,12 @@ describe("Inbox test suite",()=>{
         cy.visit(env.webmail.url.toString());
         
     })
+    it("can check profile sidebar",()=>{
+        cy.get(webmail.profileName).click()
+        cy.get('[class="profile-content"]').should("be.visible").get('[class="about-anchor"]').children().then(elem=>{
+            cy.wrap(elem).should("be.visible");
+        });
+    })    
     it("can see its profile name on Inbox",()=>{
         let inbox = cy.get(webmail.inboxName).invoke("text");
         inbox.then(inboxName=>{
@@ -26,4 +34,17 @@ describe("Inbox test suite",()=>{
             cy.get(webmail.messageContent).screenshot(messageContent(index), { overwrite: true});
         }
     })
+    it("can create and send message",()=>{
+        cy.get('#e-tbr-btn_0').click();
+        cy.get('#btnTo').should("be.visible");
+        cy.xpath('//button[@id="btnTo"]//parent::div').should("be.visible").click();
+        cy.get('ul[id="autoTo_options"] [alt="employee"]').eq(1).should("be.visible").click();
+        cy.xpath('//button[@id="btnCc"]//parent::div').should("be.visible").click();
+        cy.get('ul[id="autoCc_options"] [alt="employee"]').eq(3).should("be.visible").click();
+        cy.get('[id="txtSubject"]').type("Message subject");
+        cy.readFile("./cypress/fixtures/webmail.message.txt","utf-8").then(text=>{
+            cy.get('[id="mailContentMessage"]').type(text);
+        })
+    })
+
 })
