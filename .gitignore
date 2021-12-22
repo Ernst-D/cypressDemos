@@ -105,3 +105,6 @@ dist
 
 # video records
 *.mp4
+
+# screenshots from cypress
+cypress/screenshots

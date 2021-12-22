@@ -1,4 +1,7 @@
+import webmailPage from "../../pages/webmail/webmail.page";
 import env from "../../support/env";
+
+const webmail = webmailPage;
 
 describe("Inbox test suite",()=>{
     before("User navigates to inbox", ()=>{
@@ -6,21 +9,21 @@ describe("Inbox test suite",()=>{
         
     })
     it("can see its profile name on Inbox",()=>{
-        let inbox = cy.get('[data-uid="7"] > :nth-child(2) > .e-list-text').invoke("text");
+        let inbox = cy.get(webmail.inboxName).invoke("text");
         inbox.then(inboxName=>{
-            let profile = cy.get('#profile-div').invoke("text");
+            let profile = cy.get(webmail.profileName).invoke("text");
             profile.then(profileName=>{
                 expect(inboxName).to.be.equal(profileName.trim());
             })
         })
     })
     it("can see content of message",()=>{
+        let messageContent = (index: number): string => `message-${index}-content`;
         let num = 3;
         for (let index = 0; index < num; index++) {
-            cy.get('[class="e-content"] [class="e-list-item e-level-1"]').eq(index).click()
+            cy.get(webmail.messageComponent).eq(index).click({force:true});
+            cy.get(webmail.messageContent).should("be.visible");
+            cy.get(webmail.messageContent).screenshot(messageContent(index), { overwrite: true});
         }
-        /**
-         * Add action to take a screenshot of message content
-         */
     })
 })
