@@ -11,15 +11,16 @@ describe("Inbox test suite",()=>{
         
     })
     it("can check profile sidebar",()=>{
-        cy.get(webmail.profileName).click()
-        cy.get('[class="profile-content"]').should("be.visible").get('[class="about-anchor"]').children().then(elem=>{
+        let { profile } = webmail;
+        cy.get(profile.name).click()
+        cy.get(profile.sidebar).should("be.visible").get(profile.links).children().then(elem=>{
             cy.wrap(elem).should("be.visible");
         });
     })    
     it("can see its profile name on Inbox",()=>{
         let inbox = cy.get(webmail.inboxName).invoke("text");
         inbox.then(inboxName=>{
-            let profile = cy.get(webmail.profileName).invoke("text");
+            let profile = cy.get(webmail.profile.name).invoke("text");
             profile.then(profileName=>{
                 expect(inboxName).to.be.equal(profileName.trim());
             })
