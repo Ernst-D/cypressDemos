@@ -10,13 +10,7 @@ describe("Inbox test suite",()=>{
         cy.visit(env.webmail.url.toString());
         
     })
-    it("can check profile sidebar",()=>{
-        let { profile } = webmail;
-        cy.get(profile.name).click()
-        cy.get(profile.sidebar).should("be.visible").get(profile.links).children().then(elem=>{
-            cy.wrap(elem).should("be.visible");
-        });
-    })    
+
     it("can see its profile name on Inbox",()=>{
         let inbox = cy.get(webmail.inboxName).invoke("text");
         inbox.then(inboxName=>{
@@ -47,5 +41,11 @@ describe("Inbox test suite",()=>{
             cy.get('[id="mailContentMessage"]').type(text);
         })
     })
-
+    it("can check profile sidebar",()=>{
+        let { profile } = webmail;
+        cy.get(profile.name).click()
+        cy.get(profile.sidebar).should("be.visible").get(profile.links).children().then(elem=>{
+            cy.wrap(elem).should("be.visible");
+        });
+    })    
 })
