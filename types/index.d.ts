@@ -2,12 +2,22 @@
 
 declare namespace Custom {
     namespace Commands {
-        type Pause = Cypress.Chainable<undefined> | void;
+        type UserCredentials = {
+            username: string,
+            password: string
+        };        
+        
+        type Pause = () => Cypress.Chainable<any> | void;
+        type Login = (credentials: UserCredentials) => void;
+
     }   
 }
 
 declare namespace Env {
     type Webmail = {
+        url: URL
+    }
+    type CypressRWA = {
         url: URL
     }
 }
