@@ -1,4 +1,5 @@
 {
     "viewportWidth": 1110,
-    "viewportHeight": 800
+    "viewportHeight": 800,
+    "watchForFileChanges": false
 }
