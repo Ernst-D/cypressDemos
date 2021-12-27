@@ -2,6 +2,8 @@
 /// <reference types="cypress-localstorage-commands" />
 
 
+import homePage from "../../pages/cypress-rwa/home.page";
+import loginPage from "../../pages/cypress-rwa/login.page";
 import custom from "../../support/custom";
 import env from "../../support/env";
 
@@ -9,9 +11,7 @@ let transactionId: string = "transactionId";
 
 describe("Transaction test suite",()=>{
     let cyAlias = (aliasName: string): string => "@"+aliasName;
-    
     describe("User creates transaction",()=>{ 
-
         before(() => {
             cy.clearLocalStorageSnapshot();
             cy.reload();
@@ -26,12 +26,12 @@ describe("Transaction test suite",()=>{
 
         it("user logs in and sees its username on home page",()=>{
             cy.visit(env.cypressRWA.url.toString());
-            custom.Command.login({username:"Adolfo.Skiles80", password:"s3cret"});
-            cy.get('.MuiListSubheader-root').should("be.visible");
+            loginPage.login();
+            homePage.header.should("be.visible");
         })
         it("user creates request transaction",()=>{
-            cy.get('.MuiListSubheader-root').should("be.visible");
-            cy.get('[data-test="nav-top-new-transaction"]').click();
+            homePage.header.should("be.visible");
+            homePage.newTransactionBtn.click();
             cy.get('[data-test="user-list-search-input"]').type("Adrien33");
             cy.get('[data-test="users-list"] li').eq(0).click();
             cy.get('#amount').type("1");
@@ -60,13 +60,8 @@ describe("Transaction test suite",()=>{
                 cy.log(`The text of transaction is ${text}`);
             })
             .should("equal","Requested $1.00 for test transaction note")
-            
-        })
 
-        it("another user logs in",()=>{
             let notificationsAlias: string = "notifications";
-
-            // cy.visit(env.cypressRWA.url.toString());            
             cy.get('[data-test="sidenav-signout"]').click();
             cy.intercept("GET",`/${notificationsAlias}`).as(notificationsAlias);
             custom.Command.login({username:"Adrien33", password:"s3cret"});
@@ -81,6 +76,6 @@ describe("Transaction test suite",()=>{
                     expect(notificationsRes.results.shift().transactionId).equal(id)
                 })
             })
-        }) 
+        })
     }) 
 })
