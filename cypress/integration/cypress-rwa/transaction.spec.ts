@@ -4,6 +4,7 @@
 
 import homePage from "../../pages/cypress-rwa/home.page";
 import loginPage from "../../pages/cypress-rwa/login.page";
+import transactionPage from "../../pages/cypress-rwa/transaction/transaction.page";
 import custom from "../../support/custom";
 import env from "../../support/env";
 
@@ -11,6 +12,11 @@ let transactionId = "transactionId";
 
 describe("Transaction test suite",() => {
     let cyAlias = (aliasName: string): string => "@"+aliasName;
+    
+    let transactionAlias = "transaction";
+    let transactionRes: NetworkResponse.TransactionResponse;
+    let notificationsAlias = "notifications";
+
     describe("User creates transaction",() => { 
         before(() => {
             cy.clearLocalStorageSnapshot();
@@ -32,18 +38,18 @@ describe("Transaction test suite",() => {
         it("user creates request transaction",() => {
             homePage.header.should("be.visible");
             homePage.newTransactionBtn.click();
-            cy.get('[data-test="user-list-search-input"]').type("Adrien33");
-            cy.get('[data-test="users-list"] li').eq(0).click();
-            cy.get('#amount').type("1");
-            cy.get('#transaction-create-description-input')
-            .type("test transaction note");
+            transactionPage.contact.userlistSearchInpt.type("Adrien33");
+            transactionPage.contact.usersList.eq(0).click();
+            custom.Command.pause();
+            transactionPage.payment.amountInput.type("1");
+            transactionPage.payment.noteInput.type("test transaction note");
             
-            let transactionAlias = "transaction";
-
             cy.intercept("POST","/transactions").as(transactionAlias);
-            cy.get('[data-test="transaction-create-submit-request"]').click();
+
+            transactionPage.payment.requestBtn.click();
+
             cy.wait(cyAlias(transactionAlias)).should(({ request, response }) => {
-                let transactionRes: NetworkResponse.TransactionResponse = response.body;
+                transactionRes = response.body;
                 expect(request.method).to.equal('POST');
                 expect(response.statusCode).to.equal(200);
                 cy.wrap(transactionRes.transaction.id).as(transactionId);
@@ -53,20 +59,19 @@ describe("Transaction test suite",() => {
                 cy.log(response);
             });
             
-            cy.get('[data-test="main"] [class="MuiGrid-root MuiGrid-item"]')
-            .eq(3)
-            .invoke("text")
+            transactionPage.complete.requestedTransactionContainer.invoke("text")
             .then(text => {
                 cy.log(`The text of transaction is ${text}`);
             })
             .should("equal","Requested $1.00 for test transaction note");
 
-            let notificationsAlias = "notifications";
-            cy.get('[data-test="sidenav-signout"]').click();
+            homePage.logoutBtn.click();
             cy.intercept("GET",`/${notificationsAlias}`).as(notificationsAlias);
+
             custom.Command.login({username:"Adrien33", password:"s3cret"});
-            cy.get('.MuiListSubheader-root').should("be.visible");
-            cy.get('[data-test="nav-top-notifications-link"]').click();
+            homePage.header.should("be.visible");
+            homePage.notificationIcon.click();
+
             cy.wait(cyAlias(notificationsAlias)).should(({ request, response }) => {
                 let notificationsRes = response.body;
                 expect(request.method).to.equal('GET');
