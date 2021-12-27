@@ -9,9 +9,9 @@ import env from "../../support/env";
 
 let transactionId = "transactionId";
 
-describe("Transaction test suite",()=>{
+describe("Transaction test suite",() => {
     let cyAlias = (aliasName: string): string => "@"+aliasName;
-    describe("User creates transaction",()=>{ 
+    describe("User creates transaction",() => { 
         before(() => {
             cy.clearLocalStorageSnapshot();
             cy.reload();
@@ -19,17 +19,17 @@ describe("Transaction test suite",()=>{
         afterEach(() => {
             cy.saveLocalStorage();
         });
-        beforeEach(()=>{
+        beforeEach(() => {
             cy.restoreLocalStorage();
             Cypress.Cookies.preserveOnce("connect.sid");
         });
 
-        it("user logs in and sees its username on home page",()=>{
+        it("user logs in and sees its username on home page",() => {
             cy.visit(env.cypressRWA.url.toString());
             loginPage.login();
             homePage.header.should("be.visible");
         });
-        it("user creates request transaction",()=>{
+        it("user creates request transaction",() => {
             homePage.header.should("be.visible");
             homePage.newTransactionBtn.click();
             cy.get('[data-test="user-list-search-input"]').type("Adrien33");
@@ -49,14 +49,14 @@ describe("Transaction test suite",()=>{
                 cy.wrap(transactionRes.transaction.id).as(transactionId);
               });
             cy.get(cyAlias(transactionAlias))
-            .its('response.body').then(response=>{
+            .its('response.body').then(response => {
                 cy.log(response);
             });
             
             cy.get('[data-test="main"] [class="MuiGrid-root MuiGrid-item"]')
             .eq(3)
             .invoke("text")
-            .then(text=>{
+            .then(text => {
                 cy.log(`The text of transaction is ${text}`);
             })
             .should("equal","Requested $1.00 for test transaction note");
@@ -72,7 +72,7 @@ describe("Transaction test suite",()=>{
                 expect(request.method).to.equal('GET');
                 expect(response.statusCode).to.equal(200);
                 cy.log(notificationsRes);
-                cy.get(cyAlias(transactionId)).then(id=>{
+                cy.get(cyAlias(transactionId)).then(id => {
                     expect(notificationsRes.results.shift().transactionId).equal(id);
                 });
             });

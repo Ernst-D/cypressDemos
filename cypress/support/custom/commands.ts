@@ -18,7 +18,7 @@ export const login: Custom.Commands.Login = (creds) => {
     cy.get('#username').type(creds.username);
     cy.get('#password').type(creds.password);
     cy.get('[data-test="signin-submit"]').click();
-    cy.get('[data-test="sidenav-username"]').invoke("text").then(username=>{
+    cy.get('[data-test="sidenav-username"]').invoke("text").then(username => {
         expect(username.replace("@","")).equal(creds.username);
     });
 };

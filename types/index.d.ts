@@ -7,6 +7,7 @@ declare namespace Custom {
             password: string
         };        
         
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         type Pause = () => Cypress.Chainable<any> | void;
         type Login = (credentials: UserCredentials) => void;
 
