@@ -9,7 +9,7 @@ describe("Inbox test suite",()=>{
     before("User navigates to inbox", ()=>{
         cy.visit(env.webmail.url.toString());
         
-    })
+    });
 
     it("can see its profile name on Inbox",()=>{
         let inbox = cy.get(webmail.inboxName).invoke("text");
@@ -17,9 +17,9 @@ describe("Inbox test suite",()=>{
             let profile = cy.get(webmail.profile.name).invoke("text");
             profile.then(profileName=>{
                 expect(inboxName).to.be.equal(profileName.trim());
-            })
-        })
-    })
+            });
+        });
+    });
     it("can see content of message",()=>{
         let messageContent = (index: number): string => `message-${index}-content`;
         let num = 3;
@@ -28,7 +28,7 @@ describe("Inbox test suite",()=>{
             cy.get(webmail.messageContent).should("be.visible");
             cy.get(webmail.messageContent).screenshot(messageContent(index), { overwrite: true});
         }
-    })
+    });
     it("can create and send message",()=>{
         cy.get('#e-tbr-btn_0').click();
         cy.get('#btnTo').should("be.visible");
@@ -39,13 +39,13 @@ describe("Inbox test suite",()=>{
         cy.get('[id="txtSubject"]').type("Message subject");
         cy.readFile("./cypress/fixtures/webmail.message.txt","utf-8").then(text=>{
             cy.get('[id="mailContentMessage"]').type(text);
-        })
-    })
+        });
+    });
     it("can check profile sidebar",()=>{
         let { profile } = webmail;
-        cy.get(profile.name).click()
+        cy.get(profile.name).click();
         cy.get(profile.sidebar).should("be.visible").get(profile.links).children().then(elem=>{
             cy.wrap(elem).should("be.visible");
         });
-    })    
-})
+    });    
+});
