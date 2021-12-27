@@ -21,3 +21,22 @@ declare namespace Env {
         url: URL
     }
 }
+
+declare namespace NetworkResponse {
+    type Transaction = {
+        "id":string,
+        "uuid": string,
+        "amount": number,
+        "description": string,
+        "receiverId": string,
+        "senderId": string,
+        "privacyLevel": string,
+        "status": string,
+        "requestStatus": string,
+        "createdAt": string,
+        "modifiedAt": string
+    }
+    type TransactionResponse = {
+        "transaction": Transaction
+    }
+}
