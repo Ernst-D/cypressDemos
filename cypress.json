@@ -1,5 +1,8 @@
 {
     "viewportWidth": 1110,
     "viewportHeight": 800,
-    "watchForFileChanges": false
+    "watchForFileChanges": false,
+    "env":{
+        "FAIL_FAST_STRATEGY": "spec"
+    }
 }
