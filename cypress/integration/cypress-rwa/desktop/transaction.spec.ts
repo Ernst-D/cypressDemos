@@ -19,6 +19,7 @@ describe("Transaction test suite",() => {
 
     describe("User creates transaction",() => { 
         before(() => {
+            custom.Command.isMobile();
             cy.clearLocalStorageSnapshot();
             cy.reload();
         });
