@@ -7,5 +7,9 @@ const _cypressRWA: Env.CypressRWA = {
 
 export default {
     webmail: _webmail,
-    cypressRWA: _cypressRWA
+    cypressRWA: _cypressRWA,
+    flags:{
+        mobile:"mobile",
+        device:"device"
+    }
 };

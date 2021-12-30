@@ -19,7 +19,6 @@ describe("Transaction test suite",() => {
 
     describe("User creates transaction",() => { 
         before(() => {
-            custom.Command.isMobile();
             cy.clearLocalStorageSnapshot();
             cy.reload();
         });
@@ -27,6 +26,7 @@ describe("Transaction test suite",() => {
             cy.saveLocalStorage();
         });
         beforeEach(() => {
+            custom.Command.isMobile();
             cy.restoreLocalStorage();
             Cypress.Cookies.preserveOnce("connect.sid");
         });
@@ -66,7 +66,7 @@ describe("Transaction test suite",() => {
             })
             .should("equal","Requested $1.00 for test transaction note");
 
-            homePage.logoutBtn.click();
+            homePage.logout();
             cy.intercept("GET",`/${notificationsAlias}`).as(notificationsAlias);
 
             custom.Command.login({username:"Adrien33", password:"s3cret"});
