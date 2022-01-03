@@ -25,7 +25,12 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 import "cypress-localstorage-commands";
+import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 
+
+addMatchImageSnapshotCommand();
+
+//#region Extension methods
 
 /**
  * TODO: Adapat snapshotElement to copy only the specific to element HTML 
@@ -51,3 +56,5 @@ Cypress.Commands.add('percySnapshotElement', { prevSubject: true }, (subject, na
   
     return documentClone;
 }
+
+//#endregion
