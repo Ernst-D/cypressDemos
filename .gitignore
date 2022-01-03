@@ -108,3 +108,7 @@ dist
 
 # screenshots from cypress
 cypress/screenshots
+
+# snapshots from cypress
+
+cypress/snapshots/cypress-rwa/**/__diff_output__
