@@ -29,6 +29,7 @@
     "@percy/cypress": "^3.1.1",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
+    "cypress-image-snapshot": "^4.0.1",
     "cypress-localstorage-commands": "^1.6.1",
     "cypress-xpath": "^1.6.2",
     "eslint": "^8.5.0",
