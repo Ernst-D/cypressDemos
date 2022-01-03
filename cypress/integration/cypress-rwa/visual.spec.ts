@@ -17,11 +17,16 @@ describe("Visual testing plugins suite",() => {
             cy.percySnapshot("User dashboard page");
         });
         it("side bar image snapshot",() => {
+            cy.get('[data-test="sidenav"]').percySnapshotElement("SideBar naviagtion");
+        });
+        it("header snapshot",() => {
             /**
-             * doesn't make image snapshot of specific element.
-             * creates the snapshot of current page
+             * 
              */
-            cy.get('[data-test="sidenav"]').percySnapshot("SideBar naviagtion");
+            cy.get('.MuiToolbar-root').percySnapshotElement("Naviagtion header");
+        });
+        it("main contaiiner snapshot",() => {
+            cy.get('[class="makeStyles-root-1"]').children("header").percySnapshotElement("main conatiner");
         });
     });
 });
