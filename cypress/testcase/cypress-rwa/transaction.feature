@@ -4,7 +4,7 @@ Feature: User creates request transaction
 
     Scenario: User logs in
         Given User is on the login page
-        When It logs as Tavares_Barrows
+        When It logs as Adolfo.Skiles80
         Then It sees the home page
         And User sees his username
     

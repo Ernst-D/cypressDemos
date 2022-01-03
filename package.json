@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/Ernst-D/cypressDemos#readme",
   "dependencies": {
-    "cypress": "^9.1.1"
+    "cypress": "^9.1.1",
+    "cypress-fail-fast": "^3.3.0"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.8.0",
