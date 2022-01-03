@@ -17,5 +17,6 @@
 import './commands';
 import 'cypress-xpath';
 import "cypress-fail-fast";
+import '@percy/cypress';
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
