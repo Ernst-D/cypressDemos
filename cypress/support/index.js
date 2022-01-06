@@ -20,6 +20,7 @@ import './commands';
 import 'cypress-xpath';
 import "cypress-fail-fast";
 import '@percy/cypress';
+import 'cypress-react-selector';
 
 import {configure} from '@testing-library/cypress'
 configure({testIdAttribute: 'data-test'})

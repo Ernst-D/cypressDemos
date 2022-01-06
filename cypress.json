@@ -4,6 +4,9 @@
     "watchForFileChanges": false,
     "env":{
         "FAIL_FAST_STRATEGY": "spec",
-        "grepOmitFiltered": true
+        "grepOmitFiltered": true,
+        "cypress-react-selector": {
+            "root": "#root"
+        }
     }
 }

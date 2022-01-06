@@ -2,8 +2,10 @@
     "compilerOptions": {
       "target": "es5",
       "lib": ["es5", "dom"],
-      "types": ["cypress", "@percy/cypress", 
-        "@testing-library/cypress", "cypress-grep"
+      "types": [
+        "cypress", "@percy/cypress", 
+        "@testing-library/cypress", "cypress-grep",
+        "cypress-react-selector"
       ]
     },
     "include": ["**/*.ts"]
