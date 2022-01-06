@@ -3,6 +3,7 @@
     "viewportHeight": 800,
     "watchForFileChanges": false,
     "env":{
-        "FAIL_FAST_STRATEGY": "spec"
+        "FAIL_FAST_STRATEGY": "spec",
+        "grepOmitFiltered": true
     }
 }
