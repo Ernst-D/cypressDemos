@@ -10,7 +10,7 @@ Feature: User creates request transaction
     
     Scenario: User creates request transaction
         Given User is on the home page
-        And User creates new transaction to user Giovanna74
+        And User creates new transaction to user Roberto.Gulgowski5
         When It fill amount of money and adds note on transaction page
         And It clicks on a request button
         Then User see request in notifications
