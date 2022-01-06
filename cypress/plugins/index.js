@@ -11,9 +11,8 @@
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
-const {
-  addMatchImageSnapshotPlugin,
-} = require('cypress-image-snapshot/plugin');
+const { addMatchImageSnapshotPlugin } = require('cypress-image-snapshot/plugin');
+const { configure: configureCypressTestingLibrary } = require("@testing-library/cypress")
 
 
 /**
@@ -21,6 +20,7 @@ const {
  */
 // eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
+  configureCypressTestingLibrary(config);
   addMatchImageSnapshotPlugin(on, config);
   require("cypress-fail-fast/plugin")(on, config);
   return config;

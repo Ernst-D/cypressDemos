@@ -18,5 +18,9 @@ import './commands';
 import 'cypress-xpath';
 import "cypress-fail-fast";
 import '@percy/cypress';
+
+import {configure} from '@testing-library/cypress'
+configure({testIdAttribute: 'data-test'})
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
