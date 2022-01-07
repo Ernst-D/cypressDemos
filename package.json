@@ -22,7 +22,8 @@
   "homepage": "https://github.com/Ernst-D/cypressDemos#readme",
   "dependencies": {
     "cypress": "^9.1.1",
-    "cypress-fail-fast": "^3.3.0"
+    "cypress-fail-fast": "^3.3.0",
+    "cypress-react-selector": "^2.3.13"
   },
   "devDependencies": {
     "@percy/cli": "^1.0.0-beta.71",
