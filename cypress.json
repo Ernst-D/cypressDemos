@@ -3,7 +3,7 @@
     "viewportHeight": 800,
     "watchForFileChanges": false,
     "chromeWebSecurity": false,
-    "testFiles": "**/*.{feature,features}",
+    "testFiles": "**/*.ts",
     "env":{
         "FAIL_FAST_STRATEGY": "spec",
         "grepOmitFiltered": true,
