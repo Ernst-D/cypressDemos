@@ -10,7 +10,7 @@ describe("Cypress react selector test suite",() => {
             cy.visit(env.cypressRWA.url.toString());
             cy.waitForReact(1000); 
         });
-        it("user login",{tags: ["@RWA", "@test", "@react"]},() => {
+        it("user login",{tags: ["@RWA", "@test", "@react_selector"]},() => {
             loginPage.login();
             homePage.header.should("be.visible");
             cy.react("ButtonBase",{props:{ "to":"/user/settings" }}).click();
