@@ -1,8 +1,8 @@
 /// <reference types="cypress-react-selector" />
 
-import homePage from "../../pages/cypress-rwa/home.page";
-import loginPage from "../../pages/cypress-rwa/login.page";
-import env from "../../support/env";
+import homePage from "../../../pages/cypress-rwa/home.page";
+import loginPage from "../../../pages/cypress-rwa/login.page";
+import env from "../../../support/env";
 
 describe("Cypress react selector test suite",() => {
     describe("navigate to login page",() => {

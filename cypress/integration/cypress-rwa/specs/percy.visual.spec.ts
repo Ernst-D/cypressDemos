@@ -1,6 +1,6 @@
-import homePage from "../../pages/cypress-rwa/home.page";
-import loginPage from "../../pages/cypress-rwa/login.page";
-import env from "../../support/env";
+import homePage from "../../../pages/cypress-rwa/home.page";
+import loginPage from "../../../pages/cypress-rwa/login.page";
+import env from "../../../support/env";
 
 describe("Visual testing plugins suite",() => {
     describe("Percy plugin",() => {

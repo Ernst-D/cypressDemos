@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "types": "./index.d.ts",
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint . --ext .ts",
@@ -29,9 +32,11 @@
     "@percy/cli": "^1.0.0-beta.71",
     "@percy/cypress": "^3.1.1",
     "@testing-library/cypress": "^8.0.2",
+    "@types/cypress-cucumber-preprocessor": "^4.0.1",
     "@types/cypress-image-snapshot": "^3.1.6",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
     "cypress-grep": "^2.12.2",
     "cypress-iframe": "^1.0.1",
     "cypress-image-snapshot": "^4.0.1",

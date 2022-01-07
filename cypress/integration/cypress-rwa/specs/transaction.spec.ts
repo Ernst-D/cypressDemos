@@ -2,11 +2,11 @@
 /// <reference types="cypress-localstorage-commands" />
 
 
-import homePage from "../../pages/cypress-rwa/home.page";
-import loginPage from "../../pages/cypress-rwa/login.page";
-import transactionPage from "../../pages/cypress-rwa/transaction/transaction.page";
-import custom from "../../support/custom";
-import env from "../../support/env";
+import homePage from "../../../pages/cypress-rwa/home.page";
+import loginPage from "../../../pages/cypress-rwa/login.page";
+import transactionPage from "../../../pages/cypress-rwa/transaction/transaction.page";
+import custom from "../../../support/custom";
+import env from "../../../support/env";
 
 let transactionId = "transactionId";
 
