@@ -5,7 +5,8 @@
       "types": [
         "cypress", "@percy/cypress", 
         "@testing-library/cypress", "cypress-grep",
-        "cypress-react-selector"
+        "cypress-react-selector", "cypress-wait-until",
+        "cypress-iframe"
       ]
     },
     "include": ["**/*.ts"]
