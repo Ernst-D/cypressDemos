@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-  cypress: cypress-io/cypress@1
 
 executors:
   chrome-only:
@@ -13,13 +11,16 @@ linux-workflow: &linux-workflow
     # Run Webmail E2E tests in desktop Chrome
     - cypress/run:
         name: "Linux - Chrome - Webmail e2e - Desktop"
-        browser: chrome
-        executor: chrome-only
-        pre-steps:
+        steps:
+          - run:
+              name: Install deps
+              command: npm i
           - run:
               name: Cypress info
               command: npx cypress -v
-        start: npm run e2e:webmail
+          - run:
+              name: "Run webmail e2e"
+              command: npm run e2e:webmail
 
 workflows:
   linux:
