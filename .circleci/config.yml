@@ -21,7 +21,7 @@ jobs:
           command: npm run e2e:webmail
           name: Run webmail e2e tests
       - store_artifacts:
-          path: /screenshots/webmail/*
+          path: ./cypress/screenshots/webmail/*
           destination: webmail_screenshots
 workflows:
   myWorkflow:
