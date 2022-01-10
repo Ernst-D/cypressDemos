@@ -1,4 +1,10 @@
 version: 2.1
+
+parameters:
+  DEFAULT_JOB:
+    type: integer
+    default: 0
+
 orbs:
   # Continuation orb makes it easy to send
   # the generated config to the continuation API.
