@@ -1,7 +1,7 @@
 const CircleCI = require("@circleci/circleci-config-sdk");
 const nodeExecutor = require("../executors/node.executor");
 
-const webmailJob = new CircleCI.Job("webmail e2e test",nodeExecutor);
+const webmailJob = new CircleCI.Job("webmail_e2e_test",nodeExecutor);
 webmailJob
 .addStep(new CircleCI.commands.Checkout())
 .addStep(new CircleCI.commands.Run({
