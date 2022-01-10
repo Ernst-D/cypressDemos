@@ -17,13 +17,13 @@ jobs:
       - run:
           name: Check env param
           command: |
-            echo << parameters.cypress_default_job >>
+            echo << pipeline.parameters.cypress_default_job >>
       # Generate config. Our `app.js` will write
       # `dynamicConfig.yml` to a file.
       - run:
           name: Generate config
           command: |
-            $CYPRESS_DEFAULT_JOB= << parameters.cypress_default_job >> node .circleci/dynamic/app.js
+            $CYPRESS_DEFAULT_JOB= << pipeline.parameters.cypress_default_job >> node .circleci/dynamic/app.js
       # Pass the generated dynamic config to the
       # Continuation orb to trigger the Pipeline.
       - continuation/continue:
