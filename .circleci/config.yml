@@ -23,7 +23,7 @@ jobs:
       - run:
           name: Generate config
           command: |
-            CYPRESS_DEFAULT_JOB= << parameters.cypress_default_job >> node .circleci/dynamic/app.js
+            $CYPRESS_DEFAULT_JOB= << parameters.cypress_default_job >> node .circleci/dynamic/app.js
       # Pass the generated dynamic config to the
       # Continuation orb to trigger the Pipeline.
       - continuation/continue:
