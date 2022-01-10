@@ -16,7 +16,6 @@ linux-workflow: &linux-workflow
         browser: chrome
         spec: cypress/integration/webmail/*
         executor: chrome-only
-        record: true
         pre-steps:
           - run:
               name: Cypress info
