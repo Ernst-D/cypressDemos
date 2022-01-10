@@ -6,22 +6,21 @@ executors:
       - image: "cypress/browsers:node16.13.0-chrome95-ff94"
     resource_class: medium
 
-linux-workflow: &linux-workflow
-  jobs:
-    # Run Webmail E2E tests in desktop Chrome
-    - cypress/run:
-        name: "Linux - Chrome - Webmail e2e - Desktop"
-        steps:
-          - run:
-              name: Install deps
-              command: npm i
-          - run:
-              name: Cypress info
-              command: npx cypress -v
-          - run:
-              name: "Run webmail e2e"
-              command: npm run e2e:webmail
-
+jobs:
+  cypress-tests:
+    executor: chrome-only
+    steps:
+      - checkout: {}
+      - run:
+          command: npm install
+          name: NPM Install
+      - run:
+          command: npx cypress -v
+          name: Check Cypress
+      - run:
+          command: npm run e2e:webmail
+          name: Run webmail e2e tests
 workflows:
-  linux:
-    <<: *linux-workflow
+  myWorkflow:
+    jobs:
+      - cypress-tests: {}
