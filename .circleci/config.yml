@@ -10,26 +10,17 @@ executors:
 
 linux-workflow: &linux-workflow
   jobs:
-    # Setup
-    #  1. Install Cypress
-    #  2. Run Webmail tests
-
-    - cypress/install:
-        name: "Setup Linux"
-        executor: chrome-only
-        build: "npm i"
-        post-steps:
-          - run:
-              name: Print cypress info
-              command: npx cypress -v
-
     # Run Webmail E2E tests in desktop Chrome
     - cypress/run:
         name: "Linux - Chrome - Webmail e2e - Desktop"
         browser: chrome
         spec: cypress/integration/webmail/*
         executor: chrome-only
-        start: npx cypress run
+        record: true
+        steps:
+           - run:
+              name: Run cypress-cli
+              command: npx cypress run
 
 workflows:
   linux:
