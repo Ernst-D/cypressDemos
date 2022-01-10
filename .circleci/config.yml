@@ -1,9 +1,9 @@
 version: 2.1
 
 parameters:
-  DEFAULT_JOB:
-    type: integer
-    default: 0
+  default_job_env:
+    type: string
+    default: "cypress"
 
 orbs:
   # Continuation orb makes it easy to send
@@ -17,24 +17,39 @@ jobs:
     executor: node/default
     steps:
       - checkout
-      # Cache our app
       - node/install-packages:
           app-dir: .circleci/dynamic
-      - run:
-          name: Check env param
-          command: |
-            echo << pipeline.parameters.DEFAULT_JOB >>
-      # Generate config. Our `app.js` will write
-      # `dynamicConfig.yml` to a file.
-      - run:
-          name: Generate config
-          command: |
-            DEFAULT_JOB=<< pipeline.parameters.DEFAULT_JOB >> node .circleci/dynamic/app.js
-      # Pass the generated dynamic config to the
-      # Continuation orb to trigger the Pipeline.
-      - continuation/continue:
-          configuration_path: ./dynamicConfig.yml
+      - when:
+          condition:
+           equal: [ << pipeline.parameters.default_job_env >>, << pipeline.parameters.job_env >> ]
+          steps: 
+          - run:
+              name: Check env param
+              command: |
+                echo << pipeline.parameters.job_env >>
+          - run:
+              name: Generate config
+              command: |
+                DEFAULT_JOB=1 node .circleci/dynamic/app.js
+          - continuation/continue:
+              configuration_path: ./dynamicConfig.yml
+      - when:
+          condition:
+           equal: [ << pipeline.parameters.default_job_env >>, << pipeline.parameters.job_env >> ]
+          steps: 
+          - run:
+              name: Check env param
+              command: |
+                echo << pipeline.parameters.job_env >>
+          - run:
+              name: Generate config
+              command: |
+                DEFAULT_JOB=0 node .circleci/dynamic/app.js
+          - continuation/continue:
+              configuration_path: ./dynamicConfig.yml
+    
 workflows:
-  dynamic-workflow:
+  conditional-workflow:
+    when: << pipeline.parameters.job_name >>
     jobs:
       - generate-config
