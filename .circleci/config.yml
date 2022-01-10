@@ -1,29 +1,30 @@
 version: 2.1
-
-executors:
-  chrome-only:
-    docker:
-      - image: "cypress/browsers:node16.13.0-chrome95-ff94"
-    resource_class: medium
-
+orbs:
+  # Continuation orb makes it easy to send
+  # the generated config to the continuation API.
+  continuation: circleci/continuation@0.2.0
+  # Node orb used to build our config app in a Node environment.
+  node: circleci/node@4.7.0
+setup: true
 jobs:
-  cypress-tests:
-    executor: chrome-only
+  generate-config:
+    executor: node/default
     steps:
-      - checkout: {}
+      - checkout
+      # Cache our app
+      - node/install-packages:
+          app-dir: .circleci/dynamic
+      # Generate config. Our `app.js` will write
+      # `dynamicConfig.yml` to a file.
       - run:
-          command: npm install
-          name: NPM Install
-      - run:
-          command: npx cypress -v
-          name: Check Cypress
-      - run:
-          command: npm run e2e:webmail
-          name: Run webmail e2e tests
-      - store_artifacts:
-          path: ./cypress/screenshots/webmail/*
-          destination: webmail_screenshots
+          name: Generate config
+          command: |
+            node .circleci/dynamic/app.js
+      # Pass the generated dynamic config to the
+      # Continuation orb to trigger the Pipeline.
+      - continuation/continue:
+          configuration_path: ./dynamicConfig.yml
 workflows:
-  myWorkflow:
+  dynamic-workflow:
     jobs:
-      - cypress-tests: {}
+      - generate-config

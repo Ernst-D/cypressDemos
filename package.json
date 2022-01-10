@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint . --ext .ts",
     "lint:fix": "npx eslint . --fix --ext .ts",
-    "e2e:webmail":"npx cypress run --spec ./cypress/integration/webmail/*"
+    "e2e:webmail": "npx cypress run --spec ./cypress/integration/webmail/*"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/Ernst-D/cypressDemos#readme",
   "dependencies": {
+    "@circleci/circleci-config-sdk": "^0.4.0",
     "cypress": "^9.1.1",
     "cypress-fail-fast": "^3.3.0",
     "cypress-react-selector": "^2.3.13"
@@ -35,6 +36,7 @@
     "@testing-library/cypress": "^8.0.2",
     "@types/cypress-cucumber-preprocessor": "^4.0.1",
     "@types/cypress-image-snapshot": "^3.1.6",
+    "@types/node": "^17.0.8",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
     "cypress-cucumber-preprocessor": "^4.3.1",
