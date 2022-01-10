@@ -29,7 +29,7 @@ jobs:
       - run:
           name: Generate config
           command: |
-            $DEFAULT_JOB= << pipeline.parameters.DEFAULT_JOB >> node .circleci/dynamic/app.js
+            $DEFAULT_JOB=<< pipeline.parameters.DEFAULT_JOB >> node .circleci/dynamic/app.js
       # Pass the generated dynamic config to the
       # Continuation orb to trigger the Pipeline.
       - continuation/continue:
