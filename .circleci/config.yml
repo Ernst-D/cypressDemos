@@ -21,7 +21,7 @@ linux-workflow: &linux-workflow
           - run:
               name: Cypress info
               command: npx cypress -v
-        build: npx cypress run
+        start: npx cypress run
 
 workflows:
   linux:
