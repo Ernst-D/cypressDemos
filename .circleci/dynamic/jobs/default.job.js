@@ -1,7 +1,7 @@
 const CircleCI = require("@circleci/circleci-config-sdk");
 const nodeExecutor = require("../executors/node.executor");
 
-const cypressDefault = new CircleCI.Job("Cypress e2e",nodeExecutor);
+const cypressDefault = new CircleCI.Job("Default cypress tests",nodeExecutor);
 cypressDefault
 .addStep(new CircleCI.commands.Checkout())
 .addStep(new CircleCI.commands.Run({

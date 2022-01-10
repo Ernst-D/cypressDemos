@@ -4,7 +4,7 @@ const webmailJob = require("./jobs/webmail.job");
 const cypressDefault = require("./jobs/default.job");
 
 const config = new CircleCI.Config();
-const cypressWorkflow = new CircleCI.Workflow("cypressWorkflow");
+const cypressWorkflow = new CircleCI.Workflow("e2e-workflow");
 
 if(process.env.DEFAULT_JOB == 1){
   cypressWorkflow.addJob(cypressDefault);
