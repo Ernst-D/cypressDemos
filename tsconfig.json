@@ -10,5 +10,5 @@
         "cypress-iframe"
       ]
     },
-    "include": ["**/*.ts", ".circleci/dynamic/app.mjs"]
+    "include": ["**/*.ts", ".circleci/dynamic/app.js"]
 }

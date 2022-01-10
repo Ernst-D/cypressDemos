@@ -1,5 +1,5 @@
-import * as fs from "fs";
-import * as CircleCI from '@circleci/circleci-config-sdk';
+const fs = require("fs");
+const CircleCI = require('@circleci/circleci-config-sdk');
 
 const config = new CircleCI.Config();
 const cypressWorkflow = new CircleCI.Workflow("cypressWorkflow");
