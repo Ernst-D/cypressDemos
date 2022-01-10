@@ -1,13 +1,32 @@
 version: 2.1
 orbs:
   cypress: cypress-io/cypress@1
-workflows:
-  build:
-    jobs:
-      - cypress/install:
-          build: "npm i"
-      - cypress/run:
-          requires:
-            - cypress/install
-          group: "Webmail test"
-          start: "npx cypress run --spec cypress/integration/webmail/inbox.spec.ts"
+
+executors:
+  chrome-only:
+    docker:
+      - image: "cypress/browsers:node16.13.0-chrome95-ff94"
+    resource_class: medium
+
+linux-workflow: &linux-workflow
+  jobs:
+    # Setup
+    #  1. Install Cypress
+    #  2. Run Webmail tests
+
+    - cypress/install:
+        name: "Setup Linux"
+        executor: chrome-only
+        build: "npm i"
+        post-steps:
+          - run:
+              name: Print cypress info
+              command: npx cypress -v
+
+    # Run Webmail E2E tests in desktop Chrome
+    - cypress/run:
+        name: "Linux - Chrome - Webmail e2e - Desktop"
+        browser: chrome
+        spec: cypress/integration/webmail/*
+        executor: chrome-only
+        start: npx cypress run
