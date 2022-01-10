@@ -30,3 +30,7 @@ linux-workflow: &linux-workflow
         spec: cypress/integration/webmail/*
         executor: chrome-only
         start: npx cypress run
+
+workflows:
+  linux:
+    <<: *linux-workflow
