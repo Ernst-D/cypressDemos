@@ -19,7 +19,7 @@ jobs:
       - run:
           name: Generate config
           command: |
-            node .circleci/dynamic/app.js
+            node .circleci/dynamic/app.ts
       # Pass the generated dynamic config to the
       # Continuation orb to trigger the Pipeline.
       - continuation/continue:
