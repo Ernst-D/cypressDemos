@@ -25,7 +25,6 @@
   },
   "homepage": "https://github.com/Ernst-D/cypressDemos#readme",
   "dependencies": {
-    "@circleci/circleci-config-sdk": "^0.4.0",
     "cypress": "^9.1.1",
     "cypress-fail-fast": "^3.3.0",
     "cypress-react-selector": "^2.3.13"
