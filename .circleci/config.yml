@@ -21,12 +21,12 @@ jobs:
           app-dir: .circleci/dynamic
       - when:
           condition:
-           equal: [ << pipeline.parameters.default_job_env >>, << pipeline.parameters.job_env >> ]
+           equal: [ << pipeline.parameters.default_job_env >>, << pipeline.parameters.job_name >> ]
           steps: 
           - run:
               name: Check env param
               command: |
-                echo << pipeline.parameters.job_env >>
+                echo << pipeline.parameters.job_name >>
           - run:
               name: Generate config
               command: |
@@ -35,12 +35,12 @@ jobs:
               configuration_path: ./dynamicConfig.yml
       - when:
           condition:
-           equal: [ << pipeline.parameters.default_job_env >>, << pipeline.parameters.job_env >> ]
+           equal: [ << pipeline.parameters.default_job_env >>, << pipeline.parameters.job_name >> ]
           steps: 
           - run:
               name: Check env param
               command: |
-                echo << pipeline.parameters.job_env >>
+                echo << pipeline.parameters.job_name >>
           - run:
               name: Generate config
               command: |
