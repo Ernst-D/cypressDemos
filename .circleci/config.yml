@@ -1,10 +1,4 @@
 version: 2.1
-
-parameters:
-  default_job_env:
-    type: string
-    default: "cypress"
-
 orbs:
   # Continuation orb makes it easy to send
   # the generated config to the continuation API.
@@ -17,39 +11,20 @@ jobs:
     executor: node/default
     steps:
       - checkout
+      # Cache our app
       - node/install-packages:
           app-dir: .circleci/dynamic
-      - when:
-          condition:
-           equal: [ << parameters.default_job_env >>, "cypress" ]
-          steps: 
-          - run:
-              name: Check env param
-              command: |
-                echo << parameters.default_job_env >>
-          - run:
-              name: Generate config
-              command: |
-                DEFAULT_JOB=1 node .circleci/dynamic/app.js
-          - continuation/continue:
-              configuration_path: ./dynamicConfig.yml
-      - when:
-          condition:
-           equal: [ << pipeline.parameters.default_job_env >>, "webmail" ]
-          steps: 
-          - run:
-              name: Check env param
-              command: |
-                echo << pipeline.parameters.default_job_env >>
-          - run:
-              name: Generate config
-              command: |
-                DEFAULT_JOB=0 node .circleci/dynamic/app.js
-          - continuation/continue:
-              configuration_path: ./dynamicConfig.yml
-    
+      # Generate config. Our `app.js` will write
+      # `dynamicConfig.yml` to a file.
+      - run:
+          name: Generate config
+          command: |
+            node .circleci/dynamic/app.js
+      # Pass the generated dynamic config to the
+      # Continuation orb to trigger the Pipeline.
+      - continuation/continue:
+          configuration_path: ./dynamicConfig.yml
 workflows:
-  conditional-workflow:
-    when: << parameters.default_job_env >>
+  dynamic-workflow:
     jobs:
       - generate-config
