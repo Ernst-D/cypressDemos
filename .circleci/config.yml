@@ -14,13 +14,12 @@ linux-workflow: &linux-workflow
     - cypress/run:
         name: "Linux - Chrome - Webmail e2e - Desktop"
         browser: chrome
-        spec: cypress/integration/webmail/*
         executor: chrome-only
         pre-steps:
           - run:
               name: Cypress info
               command: npx cypress -v
-        start: npx cypress run
+        start: npm run e2e:webmail
 
 workflows:
   linux:

@@ -10,7 +10,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint . --ext .ts",
-    "lint:fix": "npx eslint . --fix --ext .ts"
+    "lint:fix": "npx eslint . --fix --ext .ts",
+    "e2e:webmail":"npx cypress run --spec ./cypress/integration/webmail/*"
   },
   "repository": {
     "type": "git",
