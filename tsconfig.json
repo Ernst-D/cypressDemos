@@ -3,11 +3,12 @@
       "target": "es5",
       "lib": ["es5", "dom"],
       "types": [
+        "@types/node",
         "cypress", "@percy/cypress", 
         "@testing-library/cypress", "cypress-grep",
         "cypress-react-selector", "cypress-wait-until",
         "cypress-iframe"
       ]
     },
-    "include": ["**/*.ts"]
+    "include": ["**/*.ts", ".circleci/dynamic/app.js"]
 }
