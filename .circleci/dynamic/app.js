@@ -7,12 +7,8 @@ const config = new CircleCI.Config();
 config.addJob(cypressDefault).addJob(webmailJob);
 
 const cypressWorkflow = new CircleCI.Workflow("e2e-workflow");
-if(process.env.JOB_NAME == "cypress"){
-  cypressWorkflow.addJob(cypressDefault);
-}
-else{
-  cypressWorkflow.addJob(webmailJob);
-}
+
+cypressWorkflow.addJob(cypressDefault);
 
 config.addWorkflow(cypressWorkflow);
 
