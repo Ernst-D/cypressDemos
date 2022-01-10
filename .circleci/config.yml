@@ -21,12 +21,12 @@ jobs:
           app-dir: .circleci/dynamic
       - when:
           condition:
-           equal: [ << pipeline.parameters.default_job_env >>, "cypress" ]
+           equal: [ << parameters.default_job_env >>, "cypress" ]
           steps: 
           - run:
               name: Check env param
               command: |
-                echo << pipeline.parameters.default_job_env >>
+                echo << parameters.default_job_env >>
           - run:
               name: Generate config
               command: |
@@ -50,6 +50,6 @@ jobs:
     
 workflows:
   conditional-workflow:
-    when: << pipeline.parameters.default_job_env >>
+    when: << parameters.default_job_env >>
     jobs:
       - generate-config
