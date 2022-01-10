@@ -10,7 +10,7 @@ cypressDefault
 ))
 .addStep(new CircleCI.commands.Run({
     name:"Run default cypress spec",
-    command:"npx cypress run --spec cypress/integration/1-getting-started/todo.spec.js"
+    command:"npx cypress run --spec ./cypress/integration/1-getting-started/todo.spec.js"
 }))
 .addStep(new CircleCI.commands.StoreArtifacts({
     path:"./cypress/videos"
