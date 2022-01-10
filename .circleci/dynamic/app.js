@@ -6,7 +6,7 @@ const cypressDefault = require("./jobs/default.job");
 const config = new CircleCI.Config();
 const cypressWorkflow = new CircleCI.Workflow("cypressWorkflow");
 
-if(process.env.CYPRESS_DEFAULT_JOB == 1){
+if(process.env.DEFAULT_JOB == 1){
   cypressWorkflow.addJob(cypressDefault);
 }
 else{
