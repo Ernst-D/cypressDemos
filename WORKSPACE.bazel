@@ -1,0 +1,7 @@
+load("@build_bazel_rules_nodejs//toolchains/cypress:cypress_repositories.bzl", "cypress_repositories")
+
+cypress_repositories(name = "cypress", version = "1.0.0")
+
+load("@npm//@bazel/concatjs:index.bzl", "ts_library")
+load("@npm//@bazel/cypress:index.bzl", "cypress_web_test")
+
