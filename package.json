@@ -4,9 +4,6 @@
   "description": "",
   "main": "index.js",
   "types": "./index.d.ts",
-  "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npx eslint . --ext .ts",
@@ -24,29 +21,12 @@
     "url": "https://github.com/Ernst-D/cypressDemos/issues"
   },
   "homepage": "https://github.com/Ernst-D/cypressDemos#readme",
-  "dependencies": {
-    "cypress": "^9.1.1",
-    "cypress-fail-fast": "^3.3.0",
-    "cypress-react-selector": "^2.3.13"
-  },
   "devDependencies": {
     "@percy/cli": "^1.0.0-beta.71",
-    "@percy/cypress": "^3.1.1",
     "@playwright/test": "^1.19.0",
-    "@testing-library/cypress": "^8.0.2",
-    "@types/cypress-cucumber-preprocessor": "^4.0.1",
-    "@types/cypress-image-snapshot": "^3.1.6",
     "@types/node": "^17.0.8",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
-    "cypress-cucumber-preprocessor": "^4.3.1",
-    "cypress-grep": "^2.12.2",
-    "cypress-iframe": "^1.0.1",
-    "cypress-image-snapshot": "^4.0.1",
-    "cypress-localstorage-commands": "^1.6.1",
-    "cypress-wait-until": "^1.7.2",
-    "cypress-xpath": "^1.6.2",
-    "eslint": "^8.5.0",
-    "typescript": "^4.5.4"
+    "eslint": "^8.5.0"
   }
 }
