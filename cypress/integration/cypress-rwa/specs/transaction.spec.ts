@@ -2,6 +2,7 @@ import { test, expect  } from "@playwright/test";
 import homePage from "../../../pages/cypress-rwa/home.page";
 import loginPage from "../../../pages/cypress-rwa/login.page";
 import transactionPage from "../../../pages/cypress-rwa/transaction/transaction.page";
+import pageShim from "../../../pages/page.shim";
 import { cy, cypress } from "../../../pw_migration";
 import custom from "../../../support/custom";
 import env from "../../../support/env";
@@ -16,27 +17,28 @@ test.describe("Transaction test suite",() => {
     let notificationsAlias = "notifications";
 
     test.describe("User creates transaction",() => { 
-        test.beforeAll(({page}) => {
-            cy(page).clearLocalStorageSnapshot();
-            cy(page).reload();
-        });
-        test.afterEach(({page}) => {
+        // test.beforeAll(async ({page}) => {
+        //     cy(page).clearLocalStorageSnapshot();
+        //     cy(page).reload();
+        // });
+        test.afterEach(async ({page}) => {
             cy(page).saveLocalStorage();
         });
-        test.beforeEach(({page}) => {
+        test.beforeEach(async ({page}) => {
             custom.Command.isMobile();
             cy(page).restoreLocalStorage();
-            cypress().Cookies.preserveOnce("connect.sid");
         });
 
-        test("user logs in and sees its username on home page",({page}) => {
-            cy(page).visit(env.cypressRWA.url.toString());
-            loginPage.login();
-            homePage.header.should("be.visible");
+        test("user logs in and sees its username on home page",async ({page}) => {
+            await cy(page).visit(env.cypressRWA.url.toString());
+            await loginPage.login(page);
+            pageShim.homePage(page).header.should("be.visible");
+            await page.pause();
         });
-        test("user creates request transaction",({page}) => {
-            homePage.header.should("be.visible");
-            homePage.newTransactionBtn.click();
+        test("user creates request transaction",async ({page}) => {
+            pageShim.homePage(page).header.should("be.visible");
+            await pageShim.homePage(page).newTransactionBtn.click();
+            await page.pause();
             transactionPage.contact.userlistSearchInpt.type("Adrien33", {force:true});
             transactionPage.contact.usersList.eq(0).click();
             custom.Command.pause();
@@ -47,16 +49,16 @@ test.describe("Transaction test suite",() => {
 
             transactionPage.payment.requestBtn.click();
 
-            cy(page).wait(cyAlias(transactionAlias)).should(({ request, response }) => {
-                transactionRes = response.body;
-                expect(request.method).toEqual('POST');
-                expect(response.statusCode).toEqual(200);
-                cy(page).wrap(transactionRes.transaction.id).as(transactionId);
-              });
-            cy(page).get(cyAlias(transactionAlias))
-            .its('response.body').then(response => {
-                cy(page).log(response);
-            });
+            // cy(page).wait(cyAlias(transactionAlias)).should(({ request, response }) => {
+            //     transactionRes = response.body;
+            //     expect(request.method).toEqual('POST');
+            //     expect(response.statusCode).toEqual(200);
+            //     cy(page).wrap(transactionRes.transaction.id).as(transactionId);
+            //   });
+            // cy(page).get(cyAlias(transactionAlias))
+            // .its('response.body').then(response => {
+            //     cy(page).log(response);
+            // });
             
             transactionPage.complete.requestedTransactionContainer.invoke("text")
             .then(text => {
@@ -64,22 +66,22 @@ test.describe("Transaction test suite",() => {
             })
             .should("equal","Requested $1.00 for test transaction note");
 
-            homePage.logout();
+            // pageShim.homePage(page).logout();
             cy(page).intercept("GET",`/${notificationsAlias}`).as(notificationsAlias);
 
-            custom.Command.login({username:"Adrien33", password:"s3cret"});
-            homePage.header.should("be.visible");
-            homePage.notificationIcon.click();
+            custom.Command.login({username:"Adrien33", password:"s3cret"}, page);
+            // pageShim.homePage(page).header.should("be.visible");
+            // pageShim.homePage(page).notificationIcon.click();
 
-            cy(page).wait(cyAlias(notificationsAlias)).should(({ request, response }) => {
-                let notificationsRes = response.body;
-                expect(request.method).toEqual('GET');
-                expect(response.statusCode).toEqual(200);
-                cy(page).log(notificationsRes);
-                cy(page).get(cyAlias(transactionId)).then(id => {
-                    expect(notificationsRes.results.shift().transactionId).equal(id);
-                });
-            });
+            // cy(page).wait(cyAlias(notificationsAlias)).should(({ request, response }) => {
+            //     let notificationsRes = response.body;
+            //     expect(request.method).toEqual('GET');
+            //     expect(response.statusCode).toEqual(200);
+            //     cy(page).log(notificationsRes);
+            //     cy(page).get(cyAlias(transactionId)).then(id => {
+            //         expect(notificationsRes.results.shift().transactionId).equal(id);
+            //     });
+            // });
         });
     }); 
 });
