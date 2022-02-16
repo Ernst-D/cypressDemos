@@ -49,7 +49,7 @@ class Cy {
         console.log(stringToLog);
     }
 
-    should(this: Locator ,assertionName: string){
+    should(this: Locator ,assertionName: string): void{
         console.log(assertionName);
     }
 }

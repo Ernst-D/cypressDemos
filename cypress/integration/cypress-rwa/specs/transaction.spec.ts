@@ -13,7 +13,6 @@ test.describe("Transaction test suite",() => {
     let cyAlias = (aliasName: string): string => "@"+aliasName;
     
     let transactionAlias = "transaction";
-    let transactionRes: NetworkResponse.TransactionResponse;
     let notificationsAlias = "notifications";
 
     test.describe("User creates transaction",() => { 
@@ -32,11 +31,11 @@ test.describe("Transaction test suite",() => {
         test("user logs in and sees its username on home page",async ({page}) => {
             await cy(page).visit(env.cypressRWA.url.toString());
             await loginPage.login(page);
-            pageShim.homePage(page).header.should("be.visible");
+            pageShim.homePage(page).header;
             await page.pause();
         });
         test("user creates request transaction",async ({page}) => {
-            pageShim.homePage(page).header.should("be.visible");
+            pageShim.homePage(page).header;
             await pageShim.homePage(page).newTransactionBtn.click();
             await page.pause();
             transactionPage.contact.userlistSearchInpt.type("Adrien33", {force:true});
@@ -70,7 +69,7 @@ test.describe("Transaction test suite",() => {
             cy(page).intercept("GET",`/${notificationsAlias}`).as(notificationsAlias);
 
             custom.Command.login({username:"Adrien33", password:"s3cret"}, page);
-            // pageShim.homePage(page).header.should("be.visible");
+            // pageShim.homePage(page).header;
             // pageShim.homePage(page).notificationIcon.click();
 
             // cy(page).wait(cyAlias(notificationsAlias)).should(({ request, response }) => {
