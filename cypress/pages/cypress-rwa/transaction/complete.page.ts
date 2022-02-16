@@ -1,6 +1,6 @@
 class CompletePage {
     get requestedTransactionContainer(){
-        return cy.get('[data-test="main"] [class="MuiGrid-root MuiGrid-item"]')
+        return this.cy.get('[data-test="main"] [class="MuiGrid-root MuiGrid-item"]')
         .eq(3);
     }
 }

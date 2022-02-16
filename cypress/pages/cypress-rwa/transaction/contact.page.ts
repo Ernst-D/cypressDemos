@@ -1,10 +1,12 @@
-class ContactPage {
+import BasePage from "../../base.page";
+
+class ContactPage extends BasePage {
     get userlistSearchInpt(){
-        return cy.get('[data-test="user-list-search-input"]');
+        return this.cy.get('[data-test="user-list-search-input"]');
     }
 
     get usersList(){
-        return cy.get('[data-test="users-list"] li');
+        return this.cy.get('[data-test="users-list"] li');
     }
 }
-export default new ContactPage();
+export default ContactPage;

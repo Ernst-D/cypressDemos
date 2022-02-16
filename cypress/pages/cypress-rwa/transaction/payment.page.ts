@@ -1,14 +1,16 @@
-class PaymentPage {
+import BasePage from "../../base.page";
+
+class PaymentPage extends BasePage {
     get amountInput(){
-        return cy.get('#amount');
+        return this.cy.get('#amount');
     }
 
     get noteInput(){
-        return cy.get('#transaction-create-description-input');
+        return this.cy.get('#transaction-create-description-input');
     }
 
     get requestBtn(){
-        return cy.get('[data-test="transaction-create-submit-request"]');
+        return this.cy.get('[data-test="transaction-create-submit-request"]');
     }
 }
-export default new PaymentPage();
+export default PaymentPage;
