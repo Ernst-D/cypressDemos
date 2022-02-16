@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const _cookies = {
     preserveOnce(cookieName:string){
         return cookieName;
@@ -5,8 +6,13 @@ const _cookies = {
 };
 
 class Cypress {
+    
     get Cookies(){
-        return _cookies;
+        return console.log(_cookies);
+    }
+
+    env(envVariable: string){
+        return console.log(envVariable);
     }
 }
 export default Cypress;

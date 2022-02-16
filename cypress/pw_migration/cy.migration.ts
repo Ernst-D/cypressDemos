@@ -1,4 +1,5 @@
-import { Page } from "@playwright/test";
+/* eslint-disable no-console */
+import { Page, Locator } from "@playwright/test";
 
 class Cy {
     page: Page;
@@ -23,8 +24,8 @@ class Cy {
         return "restoreLocalStorage";
     }
 
-    visit(mockUrl: string){
-        return mockUrl;
+    async visit(url: string){
+        await this.page.goto(url);
     }
 
     intercept(queryName: string, route: string): Cy {
@@ -38,6 +39,18 @@ class Cy {
         // eslint-disable-next-line no-console
         console.log(aliasName);
         return this;
+    }
+
+    get(locatorString: string): Locator {
+        return this.page.locator(locatorString);
+    }
+
+    log(stringToLog: string){
+        console.log(stringToLog);
+    }
+
+    should(this: Locator ,assertionName: string){
+        console.log(assertionName);
     }
 }
 export default Cy;
